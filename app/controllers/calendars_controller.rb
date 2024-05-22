@@ -38,7 +38,14 @@ class CalendarsController < ApplicationController
       plans.each do |plan|
         today_plans.push(plan.plan) if plan.date == @todays_date + x
       end
-      days = { :month => (@todays_date + x).month, :date => (@todays_date+x).day, :plans => today_plans}
+      wday = wdays[(@todays_date + x).wday]  # 曜日の取得
+
+      days = { 
+        month: (@todays_date + x).month, 
+        date: (@todays_date + x).day, 
+        wday: wday,  # 曜日の追加
+        plans: today_plans 
+      }
       @week_days.push(days)
     end
 
